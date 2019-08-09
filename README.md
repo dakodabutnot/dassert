@@ -22,20 +22,35 @@ dependencies {
 
 full list of examples for all supported assertions
 
+#### null-checking
+
+```kotlin
+val foo = null
+dassert {
+  foo.isNull // true
+  foo.isNotNull // false
+}
+```
+
+#### equality
+
+```kotlin
+val foo = "foo"; val bar = "bar"
+dassert {
+  foo isEqualTo bar // false
+  foo isEqualTo foo // true
+  foo isNotEqualTo bar // true
+}
+```
+
 ```kotlin
 dassert {
-  foo.isNull
-  bar.isNotNull
   foo.isTrue
   bar.isFalse
-  foo isEqualTo bar
-  foo isNotEqualTo bar
   foo isSameAs bar
   foo isNotSameAs bar
   foo isIn bar
   foo isNotIn bar
-  foo `is` bar
-  foo isNot bar
   foo satisfies bar
   foo isInstanceOf bar
   foo isNotInstanceOf bar
