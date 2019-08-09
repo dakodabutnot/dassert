@@ -22,6 +22,16 @@ dependencies {
 
 full list of examples for all supported assertions
 
+#### boolean checking
+
+```kotlin
+val foo = true
+dassert {
+  foo.isTrue // true
+  foo.isFalse // false
+}
+```
+
 #### null-checking
 
 ```kotlin
@@ -43,23 +53,33 @@ dassert {
 }
 ```
 
+#### comparison
+
 ```kotlin
+val foo = 2; val bar = 6
 dassert {
-  foo.isTrue
-  bar.isFalse
-  foo isSameAs bar
-  foo isNotSameAs bar
-  foo isIn bar
-  foo isNotIn bar
-  foo satisfies bar
-  foo isInstanceOf bar
-  foo isNotInstanceOf bar
-  foo hasToString bar
-  foo isGreaterThan bar
-  foo isLessThan bar
-  foo isGreaterThanOrEqualTo bar
-  foo isLessThanOrEqualTo bar
-  foo doesContain bar
-  foo doesntContain bar
+  foo isGreaterThan bar // false
+  foo isLessThan bar // true
+}
+```
+
+```kotlin
+val foo = 2; val bar = 2
+dassert {
+  foo isGreaterThan bar // false
+  foo isGreaterThanOrEqualTo bar // true
+}
+```
+
+#### collections
+
+_lists, sets and arrays_
+
+```kotlin
+val foo = "someString"
+val bar = arrayOf(foo, "anotherString", "1")
+dassert {
+  foo doesContain bar // true
+  foo doesntContain bar // false
 }
 ```
