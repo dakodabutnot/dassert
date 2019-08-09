@@ -6,11 +6,6 @@ fun dassert(block: Dassert.() -> Unit) {
     Dassert().block()
 }
 
-fun main() {
-    dassert {
-    }
-}
-
 class Dassert {
 
     val Any.isNull: Unit
