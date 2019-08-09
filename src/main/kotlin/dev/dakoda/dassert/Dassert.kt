@@ -8,13 +8,25 @@ fun dassert(block: Dassert.() -> Unit) {
 
 class Dassert {
 
-    fun Any.isNull() {
-        AssertionsForClassTypes.assertThat(this).isNull()
-    }
+    val Any.isNull: Unit
+        get() {
+            AssertionsForClassTypes.assertThat(this).isNull()
+        }
 
-    fun Any.isNotNull(): ObjectAssert<Any>? {
-        return AssertionsForClassTypes.assertThat(this).isNotNull
-    }
+    val Any.isNotNull: Unit
+        get() {
+            AssertionsForClassTypes.assertThat(this).isNotNull
+        }
+
+    val Boolean.isTrue: Unit
+        get() {
+            AssertionsForClassTypes.assertThat(this).isTrue()
+        }
+
+    val Boolean.isFalse: Unit
+        get() {
+            AssertionsForClassTypes.assertThat(this).isFalse()
+        }
 
     infix fun <T> Any.isEqualTo(t: T): ObjectAssert<Any>? {
         return AssertionsForClassTypes.assertThat(this).isEqualTo(t)
@@ -78,14 +90,6 @@ class Dassert {
 
     infix fun Int.isLessThanOrEqualTo(t: Int): AbstractIntegerAssert<*>? {
         return AssertionsForClassTypes.assertThat(this).isLessThanOrEqualTo(t)
-    }
-
-    fun Boolean.isTrue() {
-        AssertionsForClassTypes.assertThat(this).isTrue()
-    }
-
-    fun Boolean.isFalse() {
-        AssertionsForClassTypes.assertThat(this).isFalse()
     }
 
     infix fun <T> List<T>.doesContain(t: T) {
