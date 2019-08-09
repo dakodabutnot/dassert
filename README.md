@@ -22,29 +22,64 @@ dependencies {
 
 full list of examples for all supported assertions
 
+#### boolean checking
+
 ```kotlin
+val foo = true
 dassert {
-  foo.isNull
-  bar.isNotNull
-  foo.isTrue
-  bar.isFalse
-  foo isEqualTo bar
-  foo isNotEqualTo bar
-  foo isSameAs bar
-  foo isNotSameAs bar
-  foo isIn bar
-  foo isNotIn bar
-  foo `is` bar
-  foo isNot bar
-  foo satisfies bar
-  foo isInstanceOf bar
-  foo isNotInstanceOf bar
-  foo hasToString bar
-  foo isGreaterThan bar
-  foo isLessThan bar
-  foo isGreaterThanOrEqualTo bar
-  foo isLessThanOrEqualTo bar
-  foo doesContain bar
-  foo doesntContain bar
+  foo.isTrue // true
+  foo.isFalse // false
+}
+```
+
+#### null-checking
+
+```kotlin
+val foo = null
+dassert {
+  foo.isNull // true
+  foo.isNotNull // false
+}
+```
+
+#### equality
+
+```kotlin
+val foo = "foo"; val bar = "bar"
+dassert {
+  foo isEqualTo bar // false
+  foo isEqualTo foo // true
+  foo isNotEqualTo bar // true
+}
+```
+
+#### comparison
+
+```kotlin
+val foo = 2; val bar = 6
+dassert {
+  foo isGreaterThan bar // false
+  foo isLessThan bar // true
+}
+```
+
+```kotlin
+val foo = 2; val bar = 2
+dassert {
+  foo isGreaterThan bar // false
+  foo isGreaterThanOrEqualTo bar // true
+}
+```
+
+#### collections
+
+_lists, sets and arrays_
+
+```kotlin
+val foo = "someString"
+val bar = arrayOf(foo, "anotherString", "1")
+dassert {
+  foo doesContain bar // true
+  foo doesntContain bar // false
 }
 ```
