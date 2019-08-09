@@ -6,6 +6,11 @@ fun dassert(block: Dassert.() -> Unit) {
     Dassert().block()
 }
 
+fun main() {
+    dassert {
+    }
+}
+
 class Dassert {
 
     val Any.isNull: Unit
@@ -36,44 +41,12 @@ class Dassert {
         return AssertionsForClassTypes.assertThat(this).isNotEqualTo(t)
     }
 
-    infix fun <T> Any.isSameAs(t: T): ObjectAssert<Any>? {
-        return AssertionsForClassTypes.assertThat(this).isSameAs(t)
-    }
-
-    infix fun <T> Any.isNotSameAs(t: T): ObjectAssert<Any>? {
-        return AssertionsForClassTypes.assertThat(this).isNotSameAs(t)
-    }
-
     infix fun <T> Any.isIn(t: T): ObjectAssert<Any>? {
         return AssertionsForClassTypes.assertThat(this).isIn(t)
     }
 
     infix fun <T> Any.isNotIn(t: T): ObjectAssert<Any>? {
         return AssertionsForClassTypes.assertThat(this).isNotIn(t)
-    }
-
-    infix fun <T : Condition<*>> Any.`is`(t: T): ObjectAssert<Any>? {
-        return AssertionsForClassTypes.assertThat(this).`is`(t)
-    }
-
-    infix fun <T : Condition<*>> Any.isNot(t: T): ObjectAssert<Any>? {
-        return AssertionsForClassTypes.assertThat(this).isNot(t)
-    }
-
-    infix fun <T : Condition<*>> Any.satisfies(t: T): ObjectAssert<Any>? {
-        return AssertionsForClassTypes.assertThat(this).satisfies(t)
-    }
-
-    infix fun <T> Any.isInstanceOf(t: T): ObjectAssert<Any>? {
-        return AssertionsForClassTypes.assertThat(this).isInstanceOf(t)
-    }
-
-    infix fun <T> Any.isNotInstanceOf(t: T): ObjectAssert<Any>? {
-        return AssertionsForClassTypes.assertThat(this).isNotInstanceOf(t)
-    }
-
-    infix fun <T> Any.hasToString(t: T): ObjectAssert<Any>? {
-        return AssertionsForClassTypes.assertThat(this).hasToString(t)
     }
 
     infix fun Int.isGreaterThan(t: Int): AbstractIntegerAssert<*>? {
