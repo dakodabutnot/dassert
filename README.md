@@ -94,5 +94,8 @@ val bar = arrayOf(foo, "anotherString", "1")
 dassert {
   foo has bar // true
   foo doesntHave bar // false
+  
+  bar inside foo // true
+  bar notInside foo // false
 }
 ```
