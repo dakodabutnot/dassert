@@ -28,6 +28,46 @@ class Dassert {
             AssertionsForClassTypes.assertThat(this).isFalse()
         }
 
+    val Int.isZero: Unit
+        get() {
+            AssertionsForClassTypes.assertThat(this).isEqualTo(0)
+        }
+
+    val Float.isZero: Unit
+        get() {
+            AssertionsForClassTypes.assertThat(this).isEqualTo(0f)
+        }
+
+    val Double.isZero: Unit
+        get() {
+            AssertionsForClassTypes.assertThat(this).isEqualTo(0f)
+        }
+
+    val Long.isZero: Unit
+        get() {
+            AssertionsForClassTypes.assertThat(this).isEqualTo(0f)
+        }
+
+    val Int.isNotZero: Unit
+        get() {
+            AssertionsForClassTypes.assertThat(this).isNotEqualTo(0)
+        }
+
+    val Float.isNotZero: Unit
+        get() {
+            AssertionsForClassTypes.assertThat(this).isNotEqualTo(0f)
+        }
+
+    val Double.isNotZero: Unit
+        get() {
+            AssertionsForClassTypes.assertThat(this).isNotEqualTo(0f)
+        }
+
+    val Long.isNotZero: Unit
+        get() {
+            AssertionsForClassTypes.assertThat(this).isNotEqualTo(0f)
+        }
+
     infix fun <T> Any.equals(t: T): ObjectAssert<Any>? {
         return AssertionsForClassTypes.assertThat(this).isEqualTo(t)
     }
@@ -114,5 +154,37 @@ class Dassert {
 
     infix fun <T> Array<T>.doesntContain(t: T) {
         AssertionsForClassTypes.assertThat(this.toList().contains(t)).isFalse()
+    }
+
+    infix fun <T, U> Map<T, U>.hasKey(t: T) {
+        AssertionsForInterfaceTypes.assertThat(this.containsKey(t))
+    }
+
+    infix fun <T, U> Map<T, U>.doesntHaveKey(t: T) {
+        AssertionsForInterfaceTypes.assertThat(this.containsKey(t))
+    }
+
+    infix fun <T, U> Map<T, U>.hasValue(u: U) {
+        AssertionsForInterfaceTypes.assertThat(this.containsValue(u))
+    }
+
+    infix fun <T, U> Map<T, U>.doesntHaveValue(u: U) {
+        AssertionsForInterfaceTypes.assertThat(this.containsValue(u))
+    }
+
+    infix fun <T, U> Map<T, U>.containsKey(t: T) {
+        AssertionsForInterfaceTypes.assertThat(this.containsKey(t))
+    }
+
+    infix fun <T, U> Map<T, U>.doesntContainKey(t: T) {
+        AssertionsForInterfaceTypes.assertThat(this.containsKey(t))
+    }
+
+    infix fun <T, U> Map<T, U>.containsValue(u: U) {
+        AssertionsForInterfaceTypes.assertThat(this.containsValue(u))
+    }
+
+    infix fun <T, U> Map<T, U>.doesntContainValue(u: U) {
+        AssertionsForInterfaceTypes.assertThat(this.containsValue(u))
     }
 }
