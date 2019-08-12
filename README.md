@@ -1,6 +1,9 @@
 # dassert
 
+[![](https://jitpack.io/v/dakodabutnot/dassert.svg)](https://jitpack.io/#dakodabutnot/dassert)
+
 ### installation
+
 _kotlin DSL_
 
 add jitpack.io to your repositories
@@ -14,7 +17,7 @@ repositories {
 then add this repo as a dependency
 ```gradle
 dependencies {
-  implementation("com.github.dakodabutnot", "dassert", "0.1")
+  implementation("com.github.dakodabutnot", "dassert", "0.2")
 }
 ```
 
@@ -91,5 +94,8 @@ val bar = arrayOf(foo, "anotherString", "1")
 dassert {
   foo has bar // true
   foo doesntHave bar // false
+  
+  bar inside foo // true
+  bar notInside foo // false
 }
 ```
