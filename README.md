@@ -1,6 +1,9 @@
 # dassert
 
+[![](https://jitpack.io/v/dakodabutnot/dassert.svg)](https://jitpack.io/#dakodabutnot/dassert)
+
 ### installation
+
 _kotlin DSL_
 
 add jitpack.io to your repositories
