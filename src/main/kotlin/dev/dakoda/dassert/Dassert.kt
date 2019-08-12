@@ -28,39 +28,71 @@ class Dassert {
             AssertionsForClassTypes.assertThat(this).isFalse()
         }
 
-    infix fun <T> Any.isEqualTo(t: T): ObjectAssert<Any>? {
+    infix fun <T> Any.equals(t: T): ObjectAssert<Any>? {
         return AssertionsForClassTypes.assertThat(this).isEqualTo(t)
     }
 
-    infix fun <T> Any.isNotEqualTo(t: T): ObjectAssert<Any>? {
+    infix fun <T> Any.noEquals(t: T): ObjectAssert<Any>? {
         return AssertionsForClassTypes.assertThat(this).isNotEqualTo(t)
     }
 
-    infix fun <T> Any.isIn(t: T): ObjectAssert<Any>? {
+    infix fun <T> Any.inside(t: T): ObjectAssert<Any>? {
         return AssertionsForClassTypes.assertThat(this).isIn(t)
     }
 
-    infix fun <T> Any.isNotIn(t: T): ObjectAssert<Any>? {
+    infix fun <T> Any.notInside(t: T): ObjectAssert<Any>? {
         return AssertionsForClassTypes.assertThat(this).isNotIn(t)
     }
 
-    infix fun Int.isGreaterThan(t: Int): AbstractIntegerAssert<*>? {
+    infix fun Int.greaterThan(t: Int): AbstractIntegerAssert<*>? {
         return AssertionsForClassTypes.assertThat(this).isGreaterThan(t)
     }
 
-    infix fun Int.isLessThan(t: Int): AbstractIntegerAssert<*>? {
+    infix fun Int.lessThan(t: Int): AbstractIntegerAssert<*>? {
         return AssertionsForClassTypes.assertThat(this).isLessThan(t)
     }
 
-    infix fun Int.isGreaterThanOrEqualTo(t: Int): AbstractIntegerAssert<*>? {
+    infix fun Int.greaterThanOrEquals(t: Int): AbstractIntegerAssert<*>? {
         return AssertionsForClassTypes.assertThat(this).isGreaterThanOrEqualTo(t)
     }
 
-    infix fun Int.isLessThanOrEqualTo(t: Int): AbstractIntegerAssert<*>? {
+    infix fun Int.lessThanOrEquals(t: Int): AbstractIntegerAssert<*>? {
         return AssertionsForClassTypes.assertThat(this).isLessThanOrEqualTo(t)
     }
 
-    infix fun <T> List<T>.doesContain(t: T) {
+    infix fun Int.notLessThan(t: Int): AbstractIntegerAssert<*>? {
+        return AssertionsForClassTypes.assertThat(this).isGreaterThanOrEqualTo(t)
+    }
+
+    infix fun Int.notGreaterThan(t: Int): AbstractIntegerAssert<*>? {
+        return AssertionsForClassTypes.assertThat(this).isLessThanOrEqualTo(t)
+    }
+
+    infix fun <T> List<T>.has(t: T) {
+        AssertionsForInterfaceTypes.assertThat(this.contains(t)).isTrue()
+    }
+
+    infix fun <T> List<T>.doesntHave(t: T) {
+        AssertionsForInterfaceTypes.assertThat(this.contains(t)).isFalse()
+    }
+
+    infix fun <T> Set<T>.has(t: T) {
+        AssertionsForInterfaceTypes.assertThat(this.contains(t)).isTrue()
+    }
+
+    infix fun <T> Set<T>.doesntHave(t: T) {
+        AssertionsForInterfaceTypes.assertThat(this.contains(t)).isFalse()
+    }
+
+    infix fun <T> Array<T>.has(t: T) {
+        AssertionsForClassTypes.assertThat(this.toList().contains(t)).isTrue()
+    }
+
+    infix fun <T> Array<T>.doesntHave(t: T) {
+        AssertionsForClassTypes.assertThat(this.toList().contains(t)).isFalse()
+    }
+
+    infix fun <T> List<T>.contains(t: T) {
         AssertionsForInterfaceTypes.assertThat(this.contains(t)).isTrue()
     }
 
@@ -68,7 +100,7 @@ class Dassert {
         AssertionsForInterfaceTypes.assertThat(this.contains(t)).isFalse()
     }
 
-    infix fun <T> Set<T>.doesContain(t: T) {
+    infix fun <T> Set<T>.contains(t: T) {
         AssertionsForInterfaceTypes.assertThat(this.contains(t)).isTrue()
     }
 
@@ -76,7 +108,7 @@ class Dassert {
         AssertionsForInterfaceTypes.assertThat(this.contains(t)).isFalse()
     }
 
-    infix fun <T> Array<T>.doesContain(t: T) {
+    infix fun <T> Array<T>.contains(t: T) {
         AssertionsForClassTypes.assertThat(this.toList().contains(t)).isTrue()
     }
 
