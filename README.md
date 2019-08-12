@@ -17,7 +17,7 @@ repositories {
 then add this repo as a dependency
 ```gradle
 dependencies {
-  implementation("com.github.dakodabutnot", "dassert", "0.2")
+  implementation("com.github.dakodabutnot", "dassert", "0.3")
 }
 ```
 
@@ -51,7 +51,7 @@ dassert {
 
 #### equality
 
-```equals, noEquals```
+```equals, noEquals, isZero, isNotZero```
 
 ```kotlin
 val foo = "foo"; val bar = "bar"
@@ -83,6 +83,22 @@ dassert {
 ```
 
 #### collections
+
+_maps_
+
+```hasKey, doesntHaveKey, hasValue, doesntHaveValue, containsKey, doesntContainKey, containsValue, doesntContainValue```
+
+```kotlin
+val key = "foo"; val value = 5
+val map = mapOf(Pair(key, value))
+dassert {
+  map hasKey "foo" // true
+  map hasValue 5 // true
+  
+  map hasKey "bar" // false
+  map hasValue 0 // false
+}
+```
 
 _lists, sets and arrays_
 
