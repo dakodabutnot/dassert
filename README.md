@@ -24,6 +24,8 @@ full list of examples for all supported assertions
 
 #### boolean checking
 
+```.isTrue, .isFalse```
+
 ```kotlin
 val foo = true
 dassert {
@@ -33,6 +35,8 @@ dassert {
 ```
 
 #### null-checking
+
+```.isNull, .isNotNull```
 
 ```kotlin
 val foo = null
@@ -44,30 +48,34 @@ dassert {
 
 #### equality
 
+```equals, noEquals```
+
 ```kotlin
 val foo = "foo"; val bar = "bar"
 dassert {
-  foo isEqualTo bar // false
-  foo isEqualTo foo // true
-  foo isNotEqualTo bar // true
+  foo equals bar // false
+  foo equals foo // true
+  foo noEquals bar // true
 }
 ```
 
 #### comparison
 
+```greaterThan, lessThan, greaterThanOrEquals, lessThanOrEquals, notGreaterThan, notLessThan```
+
 ```kotlin
 val foo = 2; val bar = 6
 dassert {
-  foo isGreaterThan bar // false
-  foo isLessThan bar // true
+  foo greaterThan bar // false
+  foo lessThan bar // true
 }
 ```
 
 ```kotlin
 val foo = 2; val bar = 2
 dassert {
-  foo isGreaterThan bar // false
-  foo isGreaterThanOrEqualTo bar // true
+  foo greaterThan bar // false
+  foo greaterThanOrEquals bar // true
 }
 ```
 
@@ -75,11 +83,13 @@ dassert {
 
 _lists, sets and arrays_
 
+```has, doesntHave, contains, doesntContain```
+
 ```kotlin
 val foo = "someString"
 val bar = arrayOf(foo, "anotherString", "1")
 dassert {
-  foo doesContain bar // true
-  foo doesntContain bar // false
+  foo has bar // true
+  foo doesntHave bar // false
 }
 ```
