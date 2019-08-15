@@ -84,22 +84,6 @@ dassert {
 
 #### collections
 
-_maps_
-
-```hasKey, doesntHaveKey, hasValue, doesntHaveValue, containsKey, doesntContainKey, containsValue, doesntContainValue```
-
-```kotlin
-val key = "foo"; val value = 5
-val map = mapOf(Pair(key, value))
-dassert {
-  map hasKey "foo" // true
-  map hasValue 5 // true
-  
-  map hasKey "bar" // false
-  map hasValue 0 // false
-}
-```
-
 _lists, sets and arrays_
 
 ```has, doesntHave, contains, doesntContain```
@@ -115,3 +99,31 @@ dassert {
   bar notInside foo // false
 }
 ```
+
+#### maps
+
+```kotlin
+val map = mutableMapOf("foo" to 1, "bar" to 9)
+dassertMap<String, Int> {
+  that("foo" maps 1) // true
+  that("bar" maps 9) // true
+  that("foobar" maps 19) // false
+}.on(map)
+```
+
+_The call to `.on()` is required, otherwise the block assertion will not be executed._
+
+Map assertions can fail in two ways. Either the key doesn't exist in the supplied map, or the value expected is wrong. In the case of the above example:
+
+`Exception in thread "main" java.lang.RuntimeException: Error during assertion. The key [foobar] does not exist in the supplied map.`
+
+If the example was changed to be:
+
+```kotlin
+that("foo" maps 1) // true
+that("bar" maps 8) // false
+```
+
+then the following exception would then be thrown:
+
+`Exception in thread "main" java.lang.RuntimeException: Error during assertion. At key [bar], expected value to be 8 (java.lang.Integer@694f9431) but was 9 (java.lang.Integer@f2a0b8e).`
