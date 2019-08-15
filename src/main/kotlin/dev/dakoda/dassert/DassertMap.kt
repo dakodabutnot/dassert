@@ -11,7 +11,7 @@ fun <K, V> MutableMap<K, ValExpect<K, V>>.that(valExpect: ValExpect<K, V>) {
     this[valExpect.key] = valExpect
 }
 
-private infix fun <K, V> Any.maps(value: V): ValExpect<K, V> {
+infix fun <K, V> Any.maps(value: V): ValExpect<K, V> {
     return ValExpect(this as K, value)
 }
 
