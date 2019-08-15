@@ -166,12 +166,20 @@ class Dassert {
         AssertionsForClassTypes.assertThat(this.toList().contains(t)).isFalse()
     }
 
+    infix fun <T, U> Map<T, U>.has(t: T) {
+        AssertionsForInterfaceTypes.assertThat(this).containsKey(t)
+    }
+
     infix fun <T, U> Map<T, U>.hasKey(t: T) {
         AssertionsForInterfaceTypes.assertThat(this).containsKey(t)
     }
 
     infix fun <T, U> Map<T, U>.doesntHaveKey(t: T) {
-        AssertionsForInterfaceTypes.assertThat(this).containsKey(t)
+        AssertionsForInterfaceTypes.assertThat(this).doesNotContainKey(t)
+    }
+
+    infix fun <T, U> Map<T, U>.doesntHave(t: T) {
+        AssertionsForInterfaceTypes.assertThat(this).doesNotContainKey(t)
     }
 
     infix fun <T, U> Map<T, U>.hasValue(u: U) {
@@ -179,7 +187,7 @@ class Dassert {
     }
 
     infix fun <T, U> Map<T, U>.doesntHaveValue(u: U) {
-        AssertionsForInterfaceTypes.assertThat(this).containsValue(u)
+        AssertionsForInterfaceTypes.assertThat(this).doesNotContainValue(u)
     }
 
     infix fun <T, U> Map<T, U>.containsKey(t: T) {
@@ -187,7 +195,7 @@ class Dassert {
     }
 
     infix fun <T, U> Map<T, U>.doesntContainKey(t: T) {
-        AssertionsForInterfaceTypes.assertThat(this).containsKey(t)
+        AssertionsForInterfaceTypes.assertThat(this).doesNotContainKey(t)
     }
 
     infix fun <T, U> Map<T, U>.containsValue(u: U) {
@@ -195,6 +203,6 @@ class Dassert {
     }
 
     infix fun <T, U> Map<T, U>.doesntContainValue(u: U) {
-        AssertionsForInterfaceTypes.assertThat(this).containsValue(u)
+        AssertionsForInterfaceTypes.assertThat(this).doesNotContainValue(u)
     }
 }
