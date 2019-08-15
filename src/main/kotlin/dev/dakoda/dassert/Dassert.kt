@@ -1,3 +1,5 @@
+@file:Suppress("unused")
+
 package dev.dakoda.dassert
 
 import org.assertj.core.api.*
@@ -8,12 +10,12 @@ fun dassert(block: Dassert.() -> Unit) {
 
 class Dassert {
 
-    val Any.isNull: Unit
+    val <K> K.isNull: Unit
         get() {
             AssertionsForClassTypes.assertThat(this).isNull()
         }
 
-    val Any.isNotNull: Unit
+    val <K> K.isNotNull: Unit
         get() {
             AssertionsForClassTypes.assertThat(this).isNotNull
         }
@@ -68,19 +70,27 @@ class Dassert {
             AssertionsForClassTypes.assertThat(this).isNotEqualTo(0f)
         }
 
-    infix fun <T> Any.equals(t: T): ObjectAssert<Any>? {
+    infix fun <T, K> K.equals(t: T): ObjectAssert<K>? {
         return AssertionsForClassTypes.assertThat(this).isEqualTo(t)
     }
 
-    infix fun <T> Any.noEquals(t: T): ObjectAssert<Any>? {
+    infix fun <T, K> K.noEquals(t: T): ObjectAssert<K>? {
         return AssertionsForClassTypes.assertThat(this).isNotEqualTo(t)
     }
 
-    infix fun <T> Any.inside(t: T): ObjectAssert<Any>? {
+    infix fun <T, K> K.isEqualTo(t: T): ObjectAssert<K>? {
+        return AssertionsForClassTypes.assertThat(this).isEqualTo(t)
+    }
+
+    infix fun <T, K> K.isNotEqualTo(t: T): ObjectAssert<K>? {
+        return AssertionsForClassTypes.assertThat(this).isNotEqualTo(t)
+    }
+
+    infix fun <T, K> K.inside(t: T): ObjectAssert<K>? {
         return AssertionsForClassTypes.assertThat(this).isIn(t)
     }
 
-    infix fun <T> Any.notInside(t: T): ObjectAssert<Any>? {
+    infix fun <T, K> K.notInside(t: T): ObjectAssert<K>? {
         return AssertionsForClassTypes.assertThat(this).isNotIn(t)
     }
 
