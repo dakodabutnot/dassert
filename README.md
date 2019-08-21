@@ -103,15 +103,15 @@ dassert {
 #### maps
 
 ```kotlin
-val map = mutableMapOf("foo" to 1, "bar" to 9)
-dassertMap<String, Int> {
-  that("foo" maps 1) // true
-  that("bar" maps 9) // true
-  that("foobar" maps 19) // false
-}.on(map)
+val someMap = mutableMapOf("foo" to 1, "bar" to 9)
+dassert {
+  map(someMap) {
+    "foo" maps 1
+    "bar" maps 9
+    "foobar" maps 19
+  }
+}
 ```
-
-_The call to `.on()` is required, otherwise the block assertion will not be executed._
 
 Map assertions can fail in two ways. Either the key doesn't exist in the supplied map, or the value expected is wrong. In the case of the above example:
 
@@ -120,8 +120,8 @@ Map assertions can fail in two ways. Either the key doesn't exist in the supplie
 If the example was changed to be:
 
 ```kotlin
-that("foo" maps 1) // true
-that("bar" maps 8) // false
+"foo" maps 1 // true
+"bar" maps 8 // false
 ```
 
 then the following exception would then be thrown:
