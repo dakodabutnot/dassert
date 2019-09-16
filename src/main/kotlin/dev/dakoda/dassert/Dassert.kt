@@ -10,6 +10,10 @@ fun dassert(block: Dassert.() -> Unit) {
 
 class Dassert {
 
+    fun map(map: Map<Any, Any>, block: MapDassertion<Any, Any>.() -> Unit) {
+        block.invoke(MapDassertion(map))
+    }
+
     val <K> K.isNull: Unit
         get() {
             AssertionsForClassTypes.assertThat(this).isNull()
