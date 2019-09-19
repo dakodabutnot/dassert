@@ -2,13 +2,30 @@
 
 package dev.dakoda.dassert
 
+import dev.dakoda.dassert.array.ArrayContainsDassertionExtension
+import dev.dakoda.dassert.array.ArrayContainsDassertionOrExtension
+import dev.dakoda.dassert.array.ArrayContainsDassertionXorExtension
+import dev.dakoda.dassert.map.MapDassertion
 import org.assertj.core.api.*
 
 fun dassert(block: Dassert.() -> Unit) {
-    Dassert().block()
+    Dassert().also {
+        it.block()
+        it.evaluateBooleans()
+    }
 }
 
+fun formatExceptionString(s: String) = "\"$s\""
+
 class Dassert {
+
+    var ors = arrayListOf<ArrayContainsDassertionOrExtension<Any>>()
+    var xors = arrayListOf<ArrayContainsDassertionXorExtension<Any>>()
+
+    internal fun evaluateBooleans() {
+        if (ors.isNotEmpty()) ors.forEach { it.check() }
+        if (xors.isNotEmpty()) xors.forEach { it.check() }
+    }
 
     fun map(map: Map<Any, Any>, block: MapDassertion<Any, Any>.() -> Unit) {
         block.invoke(MapDassertion(map))
@@ -156,14 +173,25 @@ class Dassert {
 
     infix fun <T> Set<T>.contains(t: T) {
         AssertionsForInterfaceTypes.assertThat(this.contains(t)).isTrue()
-    }
+}
 
     infix fun <T> Set<T>.doesntContain(t: T) {
         AssertionsForInterfaceTypes.assertThat(this.contains(t)).isFalse()
     }
 
-    infix fun <T> Array<T>.contains(t: T) {
-        AssertionsForClassTypes.assertThat(this.toList().contains(t)).isTrue()
+    infix fun <T> Array<T>.contains(t: T): ArrayContainsDassertionExtension<T> {
+        return ArrayContainsDassertionExtension(this@Dassert, this@contains, t)
+
+    }
+
+    fun <T> Array<T>.contains(vararg t: T) {
+        for (item in t) {
+            AssertionsForClassTypes.assertThat(this.toList().contains(item)).isTrue()
+        }
+    }
+
+    fun <T> Array<T>.containsExactly(vararg t: T) {
+        AssertionsForClassTypes.assertThat(this).containsExactlyElementsOf(t.asIterable())
     }
 
     infix fun <T> Array<T>.doesntContain(t: T) {
