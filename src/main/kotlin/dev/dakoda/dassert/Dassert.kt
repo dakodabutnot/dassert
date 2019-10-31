@@ -2,9 +2,9 @@
 
 package dev.dakoda.dassert
 
-import dev.dakoda.dassert.array.ArrayContainsDassertionExtension
-import dev.dakoda.dassert.array.ArrayContainsDassertionOrExtension
-import dev.dakoda.dassert.array.ArrayContainsDassertionXorExtension
+import dev.dakoda.dassert.array.DassertionExtensionArrayContains
+import dev.dakoda.dassert.array.DassertionExtensionArrayContainsOR
+import dev.dakoda.dassert.array.DassertionExtensionArrayContainsXOR
 import dev.dakoda.dassert.map.MapDassertion
 import org.assertj.core.api.*
 
@@ -15,16 +15,25 @@ fun dassert(block: Dassert.() -> Unit) {
     }
 }
 
-fun formatExceptionString(s: String) = "\"$s\""
+val Any.formatExceptionString
+    get(): String {
+        return if (this is String)
+            "\"$this\""
+        else this.toString()
+    }
+
 
 class Dassert {
 
-    var ors = arrayListOf<ArrayContainsDassertionOrExtension<Any>>()
-    var xors = arrayListOf<ArrayContainsDassertionXorExtension<Any>>()
+    var extensions = arrayListOf<DassertionExtension<Any>>()
+
+    var extensionsOR = arrayListOf<DassertionExtensionArrayContainsOR<Any>>()
+    var extensionsXOR = arrayListOf<DassertionExtensionArrayContainsXOR<Any>>()
 
     internal fun evaluateBooleans() {
-        if (ors.isNotEmpty()) ors.forEach { it.check() }
-        if (xors.isNotEmpty()) xors.forEach { it.check() }
+        if (extensionsOR.isNotEmpty()) extensionsOR.forEach { it.check() }
+        if (extensionsXOR.isNotEmpty()) extensionsXOR.forEach { it.check() }
+        if (extensions.isNotEmpty()) extensions.forEach { it.check() }
     }
 
     fun map(map: Map<Any, Any>, block: MapDassertion<Any, Any>.() -> Unit) {
@@ -179,8 +188,8 @@ class Dassert {
         AssertionsForInterfaceTypes.assertThat(this.contains(t)).isFalse()
     }
 
-    infix fun <T> Array<T>.contains(t: T): ArrayContainsDassertionExtension<T> {
-        return ArrayContainsDassertionExtension(this@Dassert, this@contains, t)
+    infix fun <T : Any> Array<T>.contains(t: T): DassertionExtensionArrayContains<T> {
+        return DassertionExtensionArrayContains(this@Dassert, this@contains, t)
 
     }
 

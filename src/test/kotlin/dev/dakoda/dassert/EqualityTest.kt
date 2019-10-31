@@ -1,4 +1,4 @@
-@file:JvmName("DasserTest")
+@file:JvmName("DassertTest")
 
 package dev.dakoda.dassert
 
@@ -44,19 +44,19 @@ class EqualityTest {
         ).forEach { (key, value) ->
             assertEquality(key, value)
             catchInequalityFailure(key, value)
+        }
 
-            // key and value are not the same
-            mapOf(
-                "true" to "false",
-                "" to " ",
-                "12345" to "12345 ",
-                "#" to "$",
-                "\\\\\\" to "\\\\",
-                " " to "   "
-            ).forEach { (key, value) ->
-                assertInequality(key, value)
-                catchEqualityFailure(key, value)
-            }
+        // key and value are not the same
+        mapOf(
+            "true" to "false",
+            "" to " ",
+            "12345" to "12345 ",
+            "#" to "$",
+            "\\\\\\" to "\\\\",
+            " " to "   "
+        ).forEach { (key, value) ->
+            assertInequality(key, value)
+            catchEqualityFailure(key, value)
         }
     }
 

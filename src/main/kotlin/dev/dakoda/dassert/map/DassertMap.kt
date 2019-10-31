@@ -3,6 +3,17 @@ package dev.dakoda.dassert.map
 import dev.dakoda.dassert.dassert
 import org.opentest4j.AssertionFailedError
 
+fun main() {
+    dassert {
+        val array = arrayOf("test", "one", "1")
+
+        array contains "test1"
+        array contains "test" and "one" and "1"
+        array contains "test1" xor "two" xor "one"
+        array contains "test2" or "1"
+    }
+}
+
 class MapDassertion<K, V>(private val mutableMap: Map<K, V>) {
 
     infix fun <K: Any, V> K.onto(value: V) = maps(value)
