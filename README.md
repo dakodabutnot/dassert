@@ -17,7 +17,7 @@ repositories {
 then add this repo as a dependency
 ```gradle
 dependencies {
-  implementation("com.github.dakodabutnot", "dassert", "1.0.1")
+  implementation("com.github.dakodabutnot", "dassert", "1.1.0-SNAP")
 }
 ```
 
